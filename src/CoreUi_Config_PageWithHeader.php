@@ -30,23 +30,23 @@ class CoreUi_Config_PageWithHeader extends CoreUi_Config_PageBlanc
             "children" => [
                 [
                     "name" => "Basic",
-                    "href" => "./"
+                    "href" => "/PageWithHeader"
                 ],
                 [
                     "name" => "Sidebar",
-                    "href" => "sidebar.php"
+                    "href" => "/PageWithSidebar"
                 ],
                 [
                     "name" => "Aside",
-                    "href" => "aside.php"
+                    "href" => "/PageWithAside"
                 ],
                 [
                     "name" => "Blanc",
-                    "href" => "blanc.php"
+                    "href" => "/Blank"
                 ],
                 [
                     "name" => "Login Page",
-                    "href" => "login.php"
+                    "href" => "/LoginPage"
                 ]
             ]
         ],
