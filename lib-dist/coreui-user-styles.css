@@ -1,0 +1,13 @@
+.brand-img {
+    background-image: url("/asset/brand-logo.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    width: 35px;
+    height: 35px;
+}
+
+.brand-name {
+    padding-left: 10px;
+    color: #000;
+}

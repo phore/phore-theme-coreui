@@ -1,0 +1,29 @@
+{
+  "name": "phore/theme-coreui",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Matthias Leuffen",
+      "email": "leuffen@continue.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Phore\\Theme\\CoreUI\\": "src/"
+    },
+    "files": [
+    ]
+  },
+  "require": {
+    "php" : ">7.0",
+    "phore/html": "dev-master",
+    "phore/theme-bootstrap": "dev-master"
+  },
+  "require-dev": {
+    "phore/micro-app": "dev-master"
+  },
+  "suggest": {
+  },
+  "minimum-stability": "dev"
+}
