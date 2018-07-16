@@ -29,6 +29,6 @@ class CoreUiModule extends Bootstrap4Module
     public function register(App $app)
     {
         parent::register($app);
-        $app->addAssetPath(__DIR__ . "/../lib-dist/");
+        $app->addAssetSearchPath(__DIR__ . "/../lib-dist/");
     }
 }
