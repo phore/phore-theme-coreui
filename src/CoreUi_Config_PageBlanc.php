@@ -16,8 +16,8 @@ use Phore\Theme\Bootstrap\Bootstrap4_Config;
 class CoreUi_Config_PageBlanc extends Bootstrap4_Config
 {
 
-    public static $DEFAULT_CSSURL = "/asset/all.css";
-    public static $DEFAULT_JSURL = "/asset/all.js";
+    public static $DEFAULT_CSSURL = "/assets/all.css";
+    public static $DEFAULT_JSURL = "/assets/all.js";
 
     public $coreui_cssUrl = "";
     public $coreui_jsUrl = "";
@@ -61,12 +61,12 @@ class CoreUi_Config_PageBlanc extends Bootstrap4_Config
 
         $this->content = null;
 
-        $this->cssUrls[] = "/asset/coreui.css";
-        $this->cssUrls[] = "/asset/coreui-user-styles.css";
+        $this->cssUrls[] = "/assets/coreui.css";
+        $this->cssUrls[] = "/assets/coreui-user-styles.css";
 
-        $this->jsUrls[] = "/asset/coreui.min.js";
-        $this->jsUrls[] = "/asset/pace.min.js";
-        $this->jsUrls[] = "/asset/perfect-scrollbar.min.js";
+        $this->jsUrls[] = "/assets/coreui.min.js";
+        $this->jsUrls[] = "/assets/pace.min.js";
+        $this->jsUrls[] = "/assets/perfect-scrollbar.min.js";
     }
 
 }
