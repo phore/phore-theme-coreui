@@ -18,7 +18,8 @@ class CoreUi_LoginPage extends CoreUi_PageBlanc
         parent::__construct($config);
 
         $content = $this->coreui_main_content->alter("@class=app flex-row align-items-center");
-        $inner = $content->elem("div @container")
+        $container = $content->elem("div @container");
+        $inner = $container
             ->elem("div @row @justify-content-center")
             ->elem("div @col-md-8")
             ->elem("div @card-group");
@@ -50,6 +51,8 @@ class CoreUi_LoginPage extends CoreUi_PageBlanc
             $resendPasswd->content("Forgot password?");
         }
 
+
+        $container->elem("div")->tpl($config->footerContent);
 
 
 

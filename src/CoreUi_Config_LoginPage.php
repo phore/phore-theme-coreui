@@ -67,5 +67,6 @@ class CoreUi_Config_LoginPage extends CoreUi_Config_PageBlanc
 
     public $formAction = "/login";
 
+    public $footerContent = ["div @style=text-align:center;color:gray;" => "This is footer content"];
 
 }
