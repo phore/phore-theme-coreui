@@ -1,5 +1,6 @@
 {
   "name": "phore/theme-coreui",
+  "description": "CoreUI theme",
   "type": "library",
   "license": "MIT",
   "authors": [
