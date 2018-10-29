@@ -40,6 +40,9 @@ class CoreUi_PageWithHeader extends CoreUi_PageBlanc
     {
         parent::__construct($config);
         $this->body->alter("@class=+header-fixed");
+
+        $this->head->elem("style")->content(".brand-img { background-image: url({$config->brandLogoUrl}); }");
+
         $this->coreui_navbar->alter("@class=+app-header +navbar");
 
         $navbar = $this->coreui_navbar;
