@@ -66,10 +66,7 @@ class CoreUi_PageBlanc extends Bootstrap4_Page
 
 
         if ($config->mainContent != null) {
-            if (is_array($config->mainContent))
-                $this->coreui_main_content->tpl($config->mainContent);
-            if (is_string($config->mainContent))
-                $this->coreui_main_content->content(new RawHtmlNode($config->mainContent));
+            $this->coreui_main_content->tpl($config->mainContent);
         }
 
 
