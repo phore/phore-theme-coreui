@@ -59,6 +59,8 @@ class CoreUi_PageBlanc extends Bootstrap4_Page
                 $cur->content($elem["name"]);
             }
             $cur->alter("@class=active");
+        } else {
+            $breadcrumb = $this->coreui_main->elem("ol @breadcrumb @breadcrumb-empty");
         }
 
         $this->coreui_main_content = $this->coreui_main->elem("div @class=container-fluid")
