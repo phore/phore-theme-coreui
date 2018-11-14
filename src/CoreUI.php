@@ -10,7 +10,7 @@ namespace Phore\Theme\CoreUI;
 
 class CoreUI
 {
-    const COREUI_ASSET_PATH = __DIR__ . "/../../../lib-dist";
+    const COREUI_ASSET_PATH = __DIR__ . "/../lib-dist";
 
     const COREUI_CSS_FILES = [
         self::COREUI_ASSET_PATH . "/coreui.css",
