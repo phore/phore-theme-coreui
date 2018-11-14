@@ -16,15 +16,15 @@ use Phore\Theme\Bootstrap\Bootstrap4_Config;
 class CoreUi_Config_PageBlanc extends Bootstrap4_Config
 {
 
-    public static $DEFAULT_CSSURL = "/assets/all.css";
-    public static $DEFAULT_JSURL = "/assets/all.js";
+    public static $DEFAULT_CSSURL = "%assetPath%/all.css";
+    public static $DEFAULT_JSURL = "%assetPath%/all.js";
 
     public $coreui_cssUrl = "";
     public $coreui_jsUrl = "";
 
     public $showBreadcrumbs = false;
 
-    public $favicon = "/asset/brand-logo.png";
+    public $favicon = "%assetPath%/brand-logo.png";
 
     public $breadcrumbPath = [
         [
@@ -61,12 +61,12 @@ class CoreUi_Config_PageBlanc extends Bootstrap4_Config
 
         $this->content = null;
 
-        $this->cssUrls[] = "/assets/coreui.css";
-        $this->cssUrls[] = "/assets/coreui-user-styles.css";
+        $this->cssUrls[] = "%assetPath%/coreui.css";
+        $this->cssUrls[] = "%assetPath%/coreui-user-styles.css";
 
-        $this->jsUrls[] = "/assets/coreui.min.js";
-        $this->jsUrls[] = "/assets/pace.min.js";
-        $this->jsUrls[] = "/assets/perfect-scrollbar.min.js";
+        $this->jsUrls[] = "%assetPath%/coreui.min.js";
+        $this->jsUrls[] = "%assetPath%/pace.min.js";
+        $this->jsUrls[] = "%assetPath%/perfect-scrollbar.min.js";
     }
 
 }
