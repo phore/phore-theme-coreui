@@ -39,10 +39,10 @@ class CoreUi_PageBlanc extends Bootstrap4_Page
     public function __construct(CoreUi_Config_PageBlanc $config)
     {
         parent::__construct($config);
-        $this->head->elem("link @rel=stylesheet @href=?", [$config->coreui_cssUrl]);
-        $this->head->elem("link @rel=icon @href=?", [$config->favicon]);
+        $this->head->elem("link @rel=stylesheet @href=?", [str_replace("%assetPath%", $config->assetPath, $config->coreui_cssUrl)]);
+        $this->head->elem("link @rel=icon @href=?", [str_replace("%assetPath%", $config->assetPath, $config->favicon)]);
         $this->body->alter("@class=app ");
-        $this->document->elem("script @language=javascript @src=?", [$config->coreui_jsUrl]);
+        $this->document->elem("script @language=javascript @src=?", [str_replace("%assetPath%", $config->assetPath, $config->coreui_jsUrl)]);
 
         $this->coreui_navbar = $navbar = $this->body->elem("header  ");
         $this->coreui_body = $body = $this->body->elem("div @app-body");
