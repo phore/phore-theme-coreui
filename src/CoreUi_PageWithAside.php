@@ -26,23 +26,26 @@ class CoreUi_PageWithAside extends CoreUi_PageWithSidebar
 
         $this->body->alter("@class=+aside-menu-fixed");
 
-        $this->coreui_aside_tabs = $tabs = $this->coreui_aside->elem("ul @class=nav nav-tabs @role=tablist");
+        $this->coreui_aside_tabs = $tabs = $this->coreui_aside[] = fhtml("ul @class=nav nav-tabs @role=tablist");
         foreach ($config->asideTabs as $index => $curTab) {
-            $tabs->elem("li @nav-item")
-                ->elem("a @data-toggle=tab @nav-link @href=:id @class=:active", ["id"=>"#".$curTab["id"], "active"=>$index==0 ? "active" : ""])
-                    ->elem("i @class=:icon", $curTab);
+            $tabs[] = fhtml([
+                "li @nav-item" => [
+                    "a @data-toggle=tab @nav-link @href=:id @class=:active" => [
+                        "i @class=:icon" => null
+                    ]
+                ]
+            ], ["id"=>"#".$curTab["id"], "active"=>$index==0 ? "active" : "", "icon"=>$curTab["icon"]]);
+
         }
 
-        $this->coreui_aside_tabcontent = $tc = $this->coreui_aside->elem("div @tab-content");
+        $this->coreui_aside_tabcontent = $tc = $this->coreui_aside[] = fhtml("div @tab-content");
         foreach ($config->asideTabs as $index => $curTab) {
-            $tabElem = $tc->elem("div @tab-pane @id=:id @class=:active @role=tabpanel", ["id"=>$curTab["id"], "active"=>$index==0 ? "active" : "" ]);
+            $tabElem = $tc[] = fhtml("div @tab-pane @id=:id @class=:active @role=tabpanel", ["id"=>$curTab["id"], "active"=>$index==0 ? "active" : "" ]);
 
             if (isset($config->asideContent[$curTab["id"]])) {
                 $tContent = $config->asideContent[$curTab["id"]];
-                if (is_array($tContent))
-                    $tabElem->tpl($tContent);
-                if (is_string($tContent))
-                    $tabElem->content(new RawHtmlNode($tContent));
+
+                $tabElem[] = $tContent;
 
             }
         }

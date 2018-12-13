@@ -18,7 +18,7 @@ class CoreUi_Config_PageWithHeader extends CoreUi_Config_PageBlanc
         $this->showBreadcrumbs = true;
     }
 
-    public $brandLogoUrl = "/fixture/bootstrap-solid.svg";
+    public $brandLogoUrl = "/assets/brand-logo.png";
     public $brandClickHref = "#";
     public $brandName = "BootUi";
 

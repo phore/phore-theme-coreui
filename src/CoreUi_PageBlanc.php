@@ -39,40 +39,41 @@ class CoreUi_PageBlanc extends Bootstrap4_Page
     public function __construct(CoreUi_Config_PageBlanc $config)
     {
         parent::__construct($config);
-        $this->head->elem("link @rel=stylesheet @href=?", [str_replace("%assetPath%", $config->assetPath, $config->coreui_cssUrl)]);
-        $this->head->elem("link @rel=icon @href=?", [str_replace("%assetPath%", $config->assetPath, $config->favicon)]);
+        $this->head[] = \fhtml("link @rel=stylesheet @href=?", [str_replace("%assetPath%", $config->assetPath, $config->coreui_cssUrl)]);
+        $this->head[] = \fhtml("link @rel=icon @href=?", [str_replace("%assetPath%", $config->assetPath, $config->favicon)]);
         $this->body->alter("@class=app ");
-        $this->document->elem("script @language=javascript @src=?", [str_replace("%assetPath%", $config->assetPath, $config->coreui_jsUrl)]);
+        $this->document[] = \fhtml("script @language=javascript @src=?", [str_replace("%assetPath%", $config->assetPath, $config->coreui_jsUrl)]);
 
-        $this->coreui_navbar = $navbar = $this->body->elem("header  ");
-        $this->coreui_body = $body = $this->body->elem("div @app-body");
-        $this->coreui_sidebar = $body->elem("div @sidebar");
-        $this->coreui_main = $main = $body->elem("main @class=main");
+        $this->coreui_navbar = $navbar = $this->body[] = \fhtml("header  ");
+        $this->coreui_body = $body = $this->body[] = \fhtml("div @app-body");
+        $this->coreui_sidebar = $body[] = \fhtml("div @sidebar");
+        $this->coreui_main = $main = $body[] = \fhtml("main @class=main");
 
         if ($config->showBreadcrumbs) {
-            $breadcrumb = $this->coreui_main->elem("ol @breadcrumb");
+            $breadcrumb = $this->coreui_main[] = \fhtml("ol @breadcrumb");
             foreach ($config->breadcrumbPath as $elem) {
-                $cur = $breadcrumb->elem("li @breadcrumb-item");
+                $cur = $breadcrumb[] = \fhtml("li @breadcrumb-item");
                 if (isset ($elem["href"])) {
-                    $cur = $cur->elem("a  @href=:href", $elem);
+                    $cur[] = \fhtml(["a  @href=:href" => $elem["name"]], $elem);
                 }
-                $cur->content($elem["name"]);
             }
             $cur->alter("@class=active");
         } else {
-            $breadcrumb = $this->coreui_main->elem("ol @breadcrumb @breadcrumb-empty");
+            $breadcrumb = $this->coreui_main[] = \fhtml("ol @breadcrumb @breadcrumb-empty");
         }
 
-        $this->coreui_main_content = $this->coreui_main->elem("div @class=container-fluid")
-            ->elem("div @id=coreui_main_content @class=animated fadein");
+        $this->coreui_main_content = $this->coreui_main[] = \fhtml(["div @class=container-fluid" => [
+            "div @id=coreui_main_content @class=animated fadein" => null
+        ]]);
+
 
 
         if ($config->mainContent != null) {
-            $this->coreui_main_content->tpl($config->mainContent);
+            $this->coreui_main_content[] = $config->mainContent;
         }
 
 
-        $this->coreui_aside = $this->coreui_body->elem("aside @class=aside-menu");
+        $this->coreui_aside = $this->coreui_body[] = \fhtml("aside @class=aside-menu");
     }
 
 

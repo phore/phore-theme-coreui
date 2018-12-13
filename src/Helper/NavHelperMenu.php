@@ -36,11 +36,11 @@ class NavHelperMenu
     public function buildElementContent(array $element, FHtml $targetNode )
     {
         if (isset ($element["icon"]))
-            $targetNode->elem("i @class=:icon @class=nav-icon", $element);
+            $targetNode[] = \fhtml("i @class=:icon @class=nav-icon", $element);
         if (isset ($element["name"]))
-            $targetNode->content(" " . $element["name"]);
+            $targetNode[] = " " . $element["name"];
         if (isset ($element["badge"]))
-            $targetNode->elem("span @class=badge badge-pill @class=:class", $element["badge"])->content($element["badge"]["content"]);
+            $targetNode[] = \fhtml(["span @class=badge badge-pill @class=:class" => $element["badge"]["content"]] , $element["badge"]);
     }
 
 
@@ -48,11 +48,11 @@ class NavHelperMenu
     public function buildElement(array $element, FHtml $targetNode)
     {
         if (isset($element["children"])) {
-            $navLi = $targetNode->elem("li @class=nav-item nav-dropdown");
-            $navLiA = $navLi->elem("a @class=nav-link nav-dropdown-toggle @href=#");
+            $navLi = $targetNode[] = \fhtml("li @class=nav-item nav-dropdown");
+            $navLiA = $navLi[] = \fhtml("a @class=nav-link nav-dropdown-toggle @href=#");
             $this->buildElementContent($element, $navLiA);
 
-            $subUl = $navLi->elem("ul @nav-dropdown-items");
+            $subUl = $navLi[] = \fhtml("ul @nav-dropdown-items");
 
             foreach ($element["children"] as $curChild) {
                 switch ($this->getType($curChild)) {
@@ -60,16 +60,16 @@ class NavHelperMenu
                         $this->attachHtml($subUl, $curChild);
                         break;
                     case self::TYPE_ELEMENT:
-                        $curLi = $subUl->elem("li @nav-item");
-                        $dropdownA = $curLi->elem("a @nav-link @href=:href", $curChild);
+                        $curLi = $subUl[] = \fhtml("li @nav-item");
+                        $dropdownA = $curLi[] = \fhtml("a @nav-link @href=:href", $curChild);
                         $this->buildElementContent($curChild, $dropdownA);
                         break;
 
                 }
             }
         } else {
-            $navLi = $targetNode->elem("li @class={$this->config["li_CssClass"]}");
-            $navLiA = $navLi->elem("a @class=nav-link @href=:href ", $element);
+            $navLi = $targetNode[] = \fhtml("li @class={$this->config["li_CssClass"]}");
+            $navLiA = $navLi[] = \fhtml("a @class=nav-link @href=:href ", $element);
             $this->buildElementContent($element, $navLiA);
 
 
@@ -91,14 +91,14 @@ class NavHelperMenu
     protected function attachHtml(FHtml $target, $elem)
     {
         if (is_array($elem["html"]))
-            return $target->tpl($elem["html"]);
+            return $target[] = $elem["html"];
         if (is_string($elem["html"]))
-            return $target->content(new RawHtmlNode($elem["html"]));
+            return $target[] = new RawHtmlNode($elem["html"]);
     }
 
     public function build(array $elems, FHtml $targetNode, $extraCssClass="")
     {
-        $navUl = $targetNode->elem("ul @class={$this->config["ul_CssClass"]} $extraCssClass");
+        $navUl = $targetNode[] = \fhtml("ul @class={$this->config["ul_CssClass"]} $extraCssClass");
         foreach ($elems as $elem) {
             switch ($this->getType($elem)) {
                 case self::TYPE_HTML:

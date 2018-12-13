@@ -18,7 +18,7 @@
   },
   "require": {
     "php" : ">7.0",
-    "phore/theme-bootstrap": "^0.1"
+    "phore/theme-bootstrap": "dev-master"
   },
   "require-dev": {
     "phore/micro-app": "dev-master"

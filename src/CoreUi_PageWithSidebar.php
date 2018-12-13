@@ -24,13 +24,13 @@ class CoreUi_PageWithSidebar extends CoreUi_PageWithHeader
         $this->body->alter("@class=+sidebar-lg-show +sidebar-fixed");
 
 
-        $sidebarNav = $this->coreui_sidebar->elem("nav @sidebar-nav");
+        $sidebarNav = $this->coreui_sidebar[] = fhtml("nav @sidebar-nav");
 
         $b = new NavHelperMenu();
         $b->config["ul_CssClass"] = "nav";
         $b->build($config->sidebarMenu, $sidebarNav);
 
-        $this->coreui_sidebar->elem("button @class=sidebar-minimizer brand-minimizer @type=button");
+        $this->coreui_sidebar[] = fhtml("button @class=sidebar-minimizer brand-minimizer @type=button");
 
 
 

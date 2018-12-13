@@ -18,44 +18,35 @@ class CoreUi_LoginPage extends CoreUi_PageBlanc
         parent::__construct($config);
 
         $content = $this->coreui_main_content->alter("@class=app flex-row align-items-center");
-        $container = $content->elem("div @container");
-        $inner = $container
-            ->elem("div @row @justify-content-center")
-            ->elem("div @col-md-8")
-            ->elem("div @card-group");
+        $container = $content[] = fhtml("div @container");
+        $inner = $container["div @row @justify-content-center"]["div @col-md-8"]["div @card-group"];
 
-        $leftCell = $inner->elem("div @card @p-4")->elem("div @card-body");
-        $rightCell = $inner->elem("div @class=card text-white bg-primary py-5 d-md-down-none @style=width:44%")->elem("div @card-body ");
-        $rightCell->tpl($config->rightSideHtml);
+        $leftCell = $inner["div @card @p-4"]["div @card-body"];
+        $rightCell = $inner["div @class=card text-white bg-primary py-5 d-md-down-none @style=width:44%"]["div @card-body"];
+        $rightCell[] = $config->rightSideHtml;
         $form = $leftCell;
 
         if ($config->formAction !== null)
-            $form = $leftCell->elem("form @id=login-form @action=? @method=POST",[$config->formAction]);
+            $form = $leftCell[] = fhtml("form @id=login-form @action=? @method=POST", [$config->formAction]);
 
-        $form->tpl($config->headerHtml);
+        $form[] = $config->headerHtml;
 
         if ($config->errorMsgHtml !== null) {
-            $form->elem("div @class=alert alert-danger")->tpl($config->errorMsgHtml);
+            $form[] = fhtml(["div @class=alert alert-danger" => $config->errorMsgHtml]);
         }
 
-        $form->tpl($config->loginForm);
-        $btnRow = $form->elem("div @class=row");
-        $button = $btnRow->elem("div @col-6")->elem("button @id=login-form-submit-button @class=btn btn-primary px-4 @type=submit");
-        $button->content("Login");
+        $form[] = $config->loginForm;
+        $btnRow = $form[] = fhtml("div @class=row");
+        $button = $btnRow["div @col-6"]["button @id=login-form-submit-button @class=btn btn-primary px-4 @type=submit"];
+        $button[] = "Login";
 
-
-        $resendPasswd = $btnRow->elem("div @col-6 @text-right")
-            ->elem("button @id=login-form-resend-password-button @class=btn btn-link px-0 @type=button");
+        $resendPasswd = $btnRow["div @col-6 @text-right"]["button @id=login-form-resend-password-button @class=btn btn-link px-0 @type=button"];
 
         if ($config->showForgotPassword) {
-            $resendPasswd->content("Forgot password?");
+            $resendPasswd[] = "Forgot password?";
         }
 
-
-        $container->elem("div")->tpl($config->footerContent);
-
-
-
+        $container["div"][] = $config->footerContent;
     }
 
 }

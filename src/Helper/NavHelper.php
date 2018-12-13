@@ -36,11 +36,11 @@ class NavHelper
     public function buildElementContent(array $element, FHtml $targetNode )
     {
         if (isset ($element["icon"]))
-            $targetNode->elem("i @class=:icon @class=", $element);
+            $targetNode[] = \fhtml("i @class=:icon @class=", $element);
         if (isset ($element["name"]))
-            $targetNode->elem("span")->content(" " . $element["name"]);
+            $targetNode["span"] = " " . $element["name"];
         if (isset ($element["badge"]))
-            $targetNode->elem("span @class=badge badge-pill @class=:class", $element["badge"])->content($element["badge"]["content"]);
+            $targetNode[] = \fhtml(["span @class=badge badge-pill @class=:class" => $element["badge"]["content"]], $element["badge"]);
     }
 
 
@@ -48,26 +48,26 @@ class NavHelper
     public function buildElement(array $element, FHtml $targetNode)
     {
         if (isset($element["children"])) {
-            $navLi = $targetNode->elem("li @class={$this->config["li_CssClass"]} {$this->config["li_dropdown_CssClass"]}");
-            $navLiA = $navLi->elem("a @class=nav-link @href=:href @data-toggle=dropdown @role=button @aria-haspopup=true @aria-expanded=false", $element);
+            $navLi = $targetNode[] = \fhtml("li @class={$this->config["li_CssClass"]} {$this->config["li_dropdown_CssClass"]}");
+            $navLiA = $navLi[] = \fhtml("a @class=nav-link @href=:href @data-toggle=dropdown @role=button @aria-haspopup=true @aria-expanded=false", $element);
             $this->buildElementContent($element, $navLiA);
 
-            $dropdownDiv = $navLi->elem("div @class=dropdown-menu {$this->config["menu_css_class"]}");
+            $dropdownDiv = $navLi[] = \fhtml("div @class=dropdown-menu {$this->config["menu_css_class"]}");
             foreach ($element["children"] as $curChild) {
                 switch ($this->getType($curChild)) {
                     case self::TYPE_HTML:
                         $this->attachHtml($dropdownDiv, $curChild);
                         break;
                     case self::TYPE_ELEMENT:
-                        $dropdownA = $dropdownDiv->elem("a @dropdown-item @href=:href", $curChild);
+                        $dropdownA = $dropdownDiv[] = \fhtml("a @dropdown-item @href=:href", $curChild);
                         $this->buildElementContent($curChild, $dropdownA);
                         break;
 
                 }
             }
         } else {
-            $navLi = $targetNode->elem("li @class={$this->config["li_CssClass"]}");
-            $navLiA = $navLi->elem("a @class=nav-link @href=:href ", $element);
+            $navLi = $targetNode[] = \fhtml("li @class={$this->config["li_CssClass"]}");
+            $navLiA = $navLi[] = \fhtml("a @class=nav-link @href=:href ", $element);
             $this->buildElementContent($element, $navLiA);
 
 
@@ -89,14 +89,14 @@ class NavHelper
     protected function attachHtml(FHtml $target, $elem)
     {
         if (is_array($elem["html"]))
-            return $target->tpl($elem["html"]);
+            return $target[] = $elem["html"];
         if (is_string($elem["html"]))
-            return $target->content(new RawHtmlNode($elem["html"]));
+            return $target[] = new RawHtmlNode($elem["html"]);
     }
 
     public function build(array $elems, FHtml $targetNode, $extraCssClass="")
     {
-        $navUl = $targetNode->elem("ul @class={$this->config["ul_CssClass"]} $extraCssClass");
+        $navUl = $targetNode[] = \fhtml("ul @class={$this->config["ul_CssClass"]} $extraCssClass");
         foreach ($elems as $elem) {
             switch ($this->getType($elem)) {
                 case self::TYPE_HTML:

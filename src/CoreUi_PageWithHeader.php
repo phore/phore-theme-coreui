@@ -41,24 +41,33 @@ class CoreUi_PageWithHeader extends CoreUi_PageBlanc
         parent::__construct($config);
         $this->body->alter("@class=+header-fixed");
 
-        $this->head->elem("style")->content(".brand-img { background-image: url({$config->brandLogoUrl}); }");
+        $this->head[] = ["style" => ".brand-img { background-image: url({$config->brandLogoUrl}); }"];
 
         $this->coreui_navbar->alter("@class=+app-header +navbar");
 
         $navbar = $this->coreui_navbar;
-        $navbar->elem("button @class=navbar-toggler sidebar-toggler d-lg-none mr-auto @type=button @data-toggle=sidebar-show")
-                ->elem("span @navbar-toggler-icon");
+        $navbar[] = [
+            "button @class=navbar-toggler sidebar-toggler d-lg-none mr-auto @type=button @data-toggle=sidebar-show" => [
+                "span @navbar-toggler-icon" => null
+            ]
+        ];
 
-        $navbar
-            ->elem("a @navbar-brand  @href=?", $config->brandClickHref)
-                ->elem("i @brand-img @navbar-brand-img @navbar-brand-full")->end()
-                ->elem("i @brand-img @navbar-brand-img @navbar-brand-minimized")->end()
-                ->elem("span @brand-name @d-md-down-none @navbar-brand-full")->content($config->brandName);
+
+        $navbar[] = \fhtml([
+            "a @navbar-brand  @href=:href" => [
+                "i @brand-img @navbar-brand-img @navbar-brand-full" => null,
+                "i @brand-img @navbar-brand-img @navbar-brand-minimized" => null,
+                "span @brand-name @d-md-down-none @navbar-brand-full" => $config->brandName
+            ]
+        ],  ["href" => $config->brandClickHref]);
 
 
         if ($this instanceof CoreUi_PageWithSidebar) {
-            $navbar->elem("button @class=navbar-toggler sidebar-toggler d-md-down-none @type=button @data-toggle=sidebar-lg-show")
-                ->elem("span @navbar-toggler-icon");
+            $navbar[] = [
+                "button @class=navbar-toggler sidebar-toggler d-md-down-none @type=button @data-toggle=sidebar-lg-show" => [
+                    "span @navbar-toggler-icon" => null
+                ]
+            ];
         }
 
         $mb = new NavHelper();
@@ -68,18 +77,23 @@ class CoreUi_PageWithHeader extends CoreUi_PageBlanc
         $mb = new NavHelper();
         $mb->config["menu_css_class"] = "dropdown-menu-right";
         $mb->build($config->header_badgebar, $navbar, "ml-auto");
-        $navbar->elem("div @style=width:20px");
+        $navbar[] = \fhtml("div @style=width:20px");
 
         if ($this instanceof CoreUi_PageWithAside) {
-            $navbar->elem("button @class=navbar-toggler aside-menu-toggler d-md-down-none @type=button @data-toggle=aside-menu-lg-show")
-                ->elem("span @navbar-toggler-icon");
-            $navbar->elem("button @class=navbar-toggler aside-menu-toggler d-lg-none @type=button @data-toggle=aside-menu-sho")
-                ->elem("span @navbar-toggler-icon");
+            $navbar[] = ["button @class=navbar-toggler aside-menu-toggler d-md-down-none @type=button @data-toggle=aside-menu-lg-show" => [
+                "span @navbar-toggler-icon" => null
+            ]];
+
+            $navbar[] = [
+                "button @class=navbar-toggler aside-menu-toggler d-lg-none @type=button @data-toggle=aside-menu-sho" => [
+                    "span @navbar-toggler-icon" => null
+                ]
+            ];
         }
 
         if ($config->footer !== null) {
-            $this->coreui_footer = $this->body->elem("footer @app-footer");
-            $this->coreui_footer->tpl($config->footer);
+            $this->coreui_footer = $this->body[] = \fhtml("footer @app-footer");
+            $this->coreui_footer[] = $config->footer;
         }
 
     }
