@@ -62,9 +62,8 @@ class CoreUi_PageBlanc extends Bootstrap4_Page
             $breadcrumb = $this->coreui_main[] = \fhtml("ol @breadcrumb @breadcrumb-empty");
         }
 
-        $this->coreui_main_content = $this->coreui_main[] = \fhtml(["div @class=container-fluid" => [
-            "div @id=coreui_main_content @class=animated fadein" => null
-        ]]);
+        $this->coreui_main_content = $this->coreui_main["div @class=container-fluid"]["div @id=coreui_main_content @class=animated fadein"];
+
 
 
 
