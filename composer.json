@@ -18,10 +18,10 @@
   },
   "require": {
     "php" : ">7.0",
-    "phore/theme-bootstrap": "dev-master"
+    "phore/theme-bootstrap": ">=0.2"
   },
   "require-dev": {
-    "phore/micro-app": "dev-master"
+    "phore/micro-app": "*"
   },
   "suggest": {
   },
