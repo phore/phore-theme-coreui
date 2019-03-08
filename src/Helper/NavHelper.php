@@ -84,6 +84,7 @@ class NavHelper
         }
         if (isset($entry["href"]))
             return self::TYPE_ELEMENT;
+        throw new \InvalidArgumentException("Invalid type of navigation button");
     }
 
     protected function attachHtml(FHtml $target, $elem)
