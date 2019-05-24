@@ -1,12 +1,13 @@
 {
   "name": "phore/theme-coreui",
   "description": "CoreUI theme",
+  "homepage": "https://infracamp.org/phore/",
   "type": "library",
   "license": "MIT",
   "authors": [
     {
       "name": "Matthias Leuffen",
-      "email": "leuffen@continue.de"
+      "email": "m@tth.es"
     }
   ],
   "autoload": {
